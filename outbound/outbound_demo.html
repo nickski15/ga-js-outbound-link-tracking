@@ -1,0 +1,103 @@
+<!DOCTYPE>
+<html>
+<head>
+  <title>Outbound Link Tracking</title>
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-XXXXX-X']);
+    _gaq.push(['_setDomainName', 'none']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head>
+<body>
+  <h1>Outbound link tracking demo</h1>
+  <h3>Debug is set to true; The GA command array for each click is outputted to console.</h3>
+
+  <p>I'd rather be here. This is an image inside a link, we track these:</p>
+  <a href="http://www.edfarrellphotography.com/sierra_nevada.html">
+     <img src="http://www.edfarrellphotography.com/sierra-nevada-bearcreekpond-2007.jpg"
+          width="300px"/>
+  </a>
+
+  <p>Some outbound links, we track these:</p>
+  <ul>
+    <li><a href="https://developers.google.com/analytics">https://developers.google.com/analytics</a></li>
+    <li><a href="http://www.html5rocks.com">http://www.html5rocks.com</a></li>
+    <li><a href="//developer.mozilla.org">//developer.mozilla.org</a></li>
+  </ul>
+
+  <p>Some internal links, no tracking:</p>
+  <ul>
+    <li><a href="/404.html">/404.html</a></li>
+    <li><a href="#woah">in page anchor</a></li>
+    <li><a href="javascript:alert('hi');">Javascript:alert('hi');</a></li>
+  </ul>
+
+  <p>Links with different _targets, we track these:</p>
+  <ul>
+    <li><a target="_blank" href="//developers.google.com/analytics">_blank</a></li>
+    <li><a target="_top" href="//developers.google.com/analytics">_top</a></li>
+    <li><a target="_parent" href="//developers.google.com/analytics">_parent</a></li>
+  </ul>
+
+  <p>Dynamic content:</p>
+  <p><a href="javascript:void(0);" onclick="displayNewLinks()">Dynamically add links below</a>
+     &ndash; They should get tracked automagically</p>
+  <div id="content"></div>
+
+
+  <script src="outbound.js"></script>
+<script>
+
+// Add outbound link tracking. magic.
+_gaq.push(trackOutboundLinks({
+  'debug': true
+}));
+
+
+
+// Testing we don't break existing event listeners.
+var listener = window.attachEvent ? 'attachEvent' : 'addEventListener';
+var eventName = window.attachEvent ? 'onclick' : 'click';
+document[listener](eventName, function() {console.log('random event listener')});
+
+function displayNewLinks() {
+  var html = [
+  '<ul>',
+    '<li><a href="http://www.edfarrellphotography.com/sierra-nevada-whitemtn-2007.jpg">',
+      'White Mountain Peak</a></li>',
+    '<li><a href="http://www.edfarrellphotography.com/sierra_mono_2007_2.jpg">',
+      'Mono Lake with Fuzzy Grass</a></li>',
+    '<li><a href="http://www.edfarrellphotography.com/sierra-nevada-keynot-1992.jpg">',
+      'Keynot Peak</a></li>',
+   '</ul>'
+  ].join('');
+  document.getElementById('content').innerHTML += html;
+}
+
+</script>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<h2 id="woah">woah!</h2>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
