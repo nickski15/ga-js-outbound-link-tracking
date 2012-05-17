@@ -18,10 +18,10 @@ function trackOutboundLinks(options) {
     var anchorTarget = '';
     var cleanUrl = '';
 
-    if (element.attachEvent) {
-      element.attachelement('on' + eventName, checkEvent);
-    } else {
+    if (element.addEventListener) {
       element.addEventListener(eventName, checkEvent);
+    } else {
+      element.attachEvent('on' + eventName, checkEvent);
     }
 
     function checkEvent(event) {
