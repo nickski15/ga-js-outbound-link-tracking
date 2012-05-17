@@ -20,7 +20,7 @@ function trackOutboundLinks(options) {
 
     if (element.addEventListener) {
       element.addEventListener(eventName, checkEvent);
-    } else {
+    } else if (element.attachEvent) {
       element.attachEvent('on' + eventName, checkEvent);
     }
 
